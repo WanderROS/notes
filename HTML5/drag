@@ -1,0 +1,7 @@
+1. 设置为可拖放的 <img draggable="true">
+2. 拖动什么 ondragstart 和 setData()
+   event.dataTransfer.setData("Text", event.target.id)
+3. 放到何处 ondragover事件规定在何处方置被拖动的对象
+   默认无法将数据/元素放置到其他元素中，如果需要允许就需要阻止默认处理方式
+4. 放置 ondrop,当放置被托放数据时会发生drop事件，
+   event.dataTransfer.getData("Text");

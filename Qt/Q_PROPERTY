@@ -1,0 +1,39 @@
+Q_PROPERTY(type name 
+           READ getFun 
+           [WRITE setFun]
+           [RESET resetFun]
+           [NOTIFY notifySignal]
+           [DESIGNABLE bool]
+           [SCRIPTABLE bool]
+           [STORED bool]
+           [USER bool]
+           [CONSTANT]
+           [FINAL])
+
+
+READ: 无参const
+WRITE： 无返回值有参函数
+RESET： 无参无返回值
+NOTIFY： 单参数信号
+DESIGNALE: 默认为true，是否出现在designer中
+SCRIPTABLE: 默认为true, 是否用于脚本
+STORED: 默认true， 是否不依赖于其他值
+USER: 默认false， 之否直接面先用户
+CONSTANT: 
+FIANL: 不能被派生类重载
+
+
+通过QObject的setProperty设置属性时，如果该属性不存在，则设置为动态属性。
+动态属性处在于QObject中，而不是其他QQMetaObject对象中。
+
+通过QObject的metaObject获得Q_PROPERTY注册的所有属性
+QMetaObject::property 返回QMetaProperty对象指针
+QMetaObject::propertyCount 属性个数（包含父类定义的属性）
+QMetaObject::propertyOffset属性的开始索引
+QMetaObject::indexOfProperty根据属性名得到属性索引
+QMetaObject::userProperty带USER的属性，无参数
+通过QMetaProperty可以获得属性的各种信息
+用QObject可以读取或设置属性
+property
+setProperty
+
