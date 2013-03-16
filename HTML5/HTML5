@@ -1,0 +1,111 @@
+Canvas
+Canvas的坐标相对于左上角(0, 0)
+
+
+var id = document.getElementById("")
+//创建context对象
+context = id.getContext("2d"); // or "3d"
+/* 2d对象是html5内置对象，拥有多种绘制路径、
+ * 矩形、圆形、字符以及添加图像的方法
+ */
+ 
+//染色
+context.fillStyle = "#FF0000" 
+//对定了形状，尺寸和位置
+context.fillRect(0, 0, 150, 75);
+//从(0, 0)到(150, 75)绘制矩形
+
+
+context.moveTo(10, 10); //移动路径的绘制起点
+context.lineTo(10, 10);
+context.stroke(); //线条边框
+
+
+// 相当于 cxt设置的属性在下面的绘制过程中会应用
+cxt.fillStyle="#FF0000";
+cxt.beginPath();
+cxt.arc(70,18,15,0,Math.PI*2,true); //绘制red圆
+cxt.closePath();
+cxt.fill();
+
+
+
+API
+
+基本线条
+context.fillRect(x, y, width, height);
+fillStyle   设置填充色
+strokeStyle   设置线条
+lineWidth   改变线条粗细
+
+fillRect()   可绘制带填充的矩形
+strokeRect()   只绘制边框
+clearRect()   清除部分canvas
+
+路径
+可绘制任意形状，先绘制轮廓，再绘制边框和填充
+
+beginPath()
+用直线曲线等其他绘制方法绘制
+fill()   添加填充
+stroke()   设置边框
+closePath()   结束绘制
+
+插入图象
+drawImage    有3，5或9个参数
+3   最基本的drawImage用法，一个参数指定图像位置，另两个个设置图像在canvas中的位置
+context.drawImage(img_elem, dx, dy)
+5   同3，此外两个指定了图像大小
+context.drawImage(img_elem, dx, dy, dw, dh)
+9   同5，另四个设置源图像中德位置和高度宽度，允许剪辑
+context.drawImage(img_elem, sx, sy, sw, sh, dx, dy, dw, dh)
+
+像素级操作
+createImageData
+getImageData   //获取ImageData
+putImageData
+ImageData对象保存了图像像素值，每个对象有三个属性:width, height和data.
+data属性类型为CanvasPixelArray, 用于存储width* height* 4个像素值，每个像素值有RGB值和透明度alpha值(0~255),像素值顺序从左至右，从上至下
+/////////////////////////
+var imgd = context.createImageData(50, 50)
+var pix = imgd.data;
+// loop over each pixel and set a transparent red
+for( var i = 0, n = pix.length; i < n; i += 4) {
+    pix[i] = 255;
+    pix[i+3] = 127;
+}
+context.putImageData(imgd, 0, 0);
+
+getImageData   //获取ImageData
+var imgd = context.getImageData(<var>x</var>, <var>y</var>, <var>width</var>, <var>height</var>);
+var pix = imgd.data;
+do some thing
+context.putImageData(imgd, <var>x</var>, <var>y</var>);
+
+文字
+context设置text的属性有
+font: 同CSS font-family
+textAlign: 文字水平对其方式，可取start, end, left, right, center.默认为start
+textBaseline: 文字竖直对其方式，可取 top, hanging, middle, alphabetic, ideographic, bottom. 默认为噢alphabetic
+
+绘制文字方法： 
+fillText   绘制带fillStyle填充的文字，
+strokeText   绘制只有strokeStyle边框的文字
+
+两者参数相同： 要绘制的文字和文字位置，[可选的最大宽度]
+
+阴影
+shadowColor: 阴影颜色
+shadowBar：设置阴影模糊程度，值越大阴影越模糊，高斯滤镜相同
+shadowOffsetX 和shadowOffsetY:阴影的x和y偏移量，像素
+
+颜色渐变
+fillStyle和strokeStyle除了设置CSS颜色，还可以设置CanvasGradient对象 ---- 通过CanvasGradient可以为线条和填充使用颜色渐变
+
+用createLinerGradient和 createRadialGradient创建CanvasGradient对象
+createLinerGradient   创建线性颜色渐变，
+createRadialGradient   创建圆形颜色渐变
+
+用对象的addColorStop方法添加颜色中间值
+var gradient1 = context.createLinearGradient(<var>sx</var>, <var>sy</var>, <var>dx</var>, <var>dy</var>);
+graditen1.addColorStop(0, "#F00");
