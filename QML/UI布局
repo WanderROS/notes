@@ -1,8 +1,0 @@
-三种： Row, Column, Grid   以及使用Anchor进行布局
-Row： 将空间都排在一行，互不重叠
-Column：。。。。。。
-Grid： 每个子控件都北方在一个网格单元的(0,0)位置，用rows和columns指定网格的行和列
-Anchor：每个item都被认为有7条隐藏的"anchor lines": left、horizontalCenter、right、top、verticalCenter、baseline、bottom
-        无文字，则baseline和top相同
-        margins：
-        offsets：

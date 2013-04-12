@@ -37,3 +37,5 @@ QMetaObject::userProperty带USER的属性，无参数
 property
 setProperty
 
+
+属性带来的抽象工厂模式
