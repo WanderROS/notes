@@ -1,0 +1,6 @@
+glPointSize()
+glLineWidth()
+属性的设置似乎是闭合的，
+glBegin()
+glEnd()
+

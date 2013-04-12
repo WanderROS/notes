@@ -1,0 +1,5 @@
+Interface: org.freedesktop.Notifications
+object path: /org/freedesktop/Notifications
+
+Notify(string arg_0, uint_32 arg_1, string arg_2, string arg_3, array of[string] arg_5, dict of{string, variant} arg_6, int32 arg_7)
+

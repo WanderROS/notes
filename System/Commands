@@ -1,0 +1,2 @@
+stat: used to see file's inode information
+strace: trace applications I/O actions, as if use mmap
