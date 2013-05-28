@@ -1,0 +1,68 @@
+Two Objects:
+    sqlite3 -- the database connection object
+	sqlite3_stmt -- the prepared statement object
+
+C/C++ interface routeine:
+    sqlite3_open()
+		opens a connection to an SQLite database
+		return a database connection object
+	sqlite3_prepare()
+		converts SQL text into a prepared statement object
+		return a pointer to that object
+		use sqlite3_prepare_v2() instead
+	sqlite3_step()
+		evalute a prepared statement that has been previously created by sqlite3_open().
+		get to the point where the rows are.
+		call again, to get the next raw
+	sqlite3_column()
+		return a single column from the current row of a result set for a prepared_statement that is being evaluated by sqlite3_step(). 
+		sqlite_column_blob()
+		sqlite_column_bytes()
+		sqlite_column_bytes16()
+		sqlite_column_count()
+		sqlite_column_double()
+		sqlite_column_int()
+		sqlite_column_int64()
+		sqlite_column_text()
+		sqlite_column_text16()
+		sqlite_column_type()
+		sqlite_column_value()
+	sqlite3_finalize()
+		destorys a prepared statement created by a prior call to sqlite3_prepare(). avoid memory leaks.
+	sqlite3_close()
+		close database connection.
+
+
+sqlite3_exec()
+	a callback function passed into sqlite3_exec() is used to process each row of the result set.
+sqlite3_get_table()
+	differs from sqlite3_exec(), it store the result of queries in heap memory rather than invoking a callback
+
+
+binding parameters and reusing prepared statements
+	sqlite3_reset()
+		use reset() amone step().
+	sqlite3_bind() 
+		overrides prior bindings on the same parameter
+		parameter forms:
+		    ?
+			?NNN   -- NNN is an integer value 
+			:AAA   -- AAA is an identifier
+			$AAA
+			@AAA
+
+
+Extending SQLite
+sqlite include interfaces that can be used to extend it's functionality.
+    sqlite3_create_collation()
+		used to create new collation sequences for sorting text
+	sqlite3_create_function()
+		create new sql functions - either scalar or aggregate. 
+		
+		the new function implementation typically makes use of the following additional interfaces:
+		    sqlite3_aggregate_context()
+		    sqlite3_result()
+		    sqlite3_user_data()
+		    sqlite3_value()
+	sqlite3_create_module()
+		used to register new virtual table implementations.

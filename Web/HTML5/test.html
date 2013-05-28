@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Web Socket Test</title
+	</head>
+	<body>
+		testing
+	<script type="text/javascript">
+		// test if supported
+		window.WebSocket =  window.WebSocket || window.MozWebSocket;
+		if( !window.WebSocket) {
+			alert("websocket is not supported");
+		}
+
+		var conn = new WebSocket("ws://chideat.org:8080/blog/index.php");
+		alert("here");
+		conn.onopen = function() {
+			alert("opened");
+		}
+		conn.onmessage = function(event) {
+			alert(event.data);
+		}
+		conn.onclose = function() {
+			alert("closed");
+		}
+		conn.onerror = function() {
+			alert("error");
+		}
+		conn.send(1);
+	</script>
+
+	</body>
+</html>

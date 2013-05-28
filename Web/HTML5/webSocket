@@ -1,0 +1,56 @@
+Http 为半全双工， 在每次请求借宿后都会主动释放链接，为一种短连接
+
+Web 即使通讯：
+1. 轮询，定时请求
+2. 长轮询** (先请求，服务器有数据了再发送)
+3. 基于lframe及htmlfile的流方式(在HTML页面里嵌入一个隐藏帧，将这个隐藏帧的src属性设为对一个长连接的亲球，服务器就能不断的往客户端输入数据，但不完美)
+
+Web Socket
+1. 真正的浏览器全双工
+2. HTTP协议的扩展，使用HTTP链接下的TCP链接来直接通信
+3. Web Socket格式是基于Frame的，最小帧只有2个字节，文本帧中，每个帧始于0x00，止于0xFF，使用UTF-8
+4. Web Socket的标记部分比long polling简洁很多
+
+检测浏览器
+window.WebSocket = window.WebSocket || window.MozWebSocket;
+if(!window.WebSocket) {...}
+
+conn = new WebSocket("http://chideat.org:8080");
+//链接建立时触发
+conn.onopen = function() {
+	state.ClassName = 'success';
+	state.innerHTML = 'Socket open';
+};
+//收到服务器端消息时触发
+conn.onmessage = function(event) {
+	var message = event.data;
+	connected.innerHTML = message;
+};
+//连接关闭时触发
+conn.onclose = function(event) {
+	state.className = 'fail';
+	state.innerHTML = 'Socket closed';
+};
+//连接出错时出发
+conn.onerror = function(){}
+
+conn.send(chat.value);
+
+send(message)
+close();	
+
+readyState表示socket的连接状态
+CONNECTING (0) 
+OPEN (1)
+CLOSING (2)
+CLOSED (3)
+
+构造函数 WebSocket#constructor(url,optional protocols)
+事件     open/message/close/error
+方法     send/close
+	send(data)
+	close(optional code, optional reason)
+
+	
+
+
