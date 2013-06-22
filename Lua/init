@@ -1,0 +1,169 @@
+lua -i file.lua   --执行脚本后进入交互模式
+dofile("file path") -- test a script
+
+字符串
+大字符串  page = [[ afasfasdf ]]
+
+Lua自动实现数字，字符串的相互转换
+Lua中的连字符： .. 即两个点。点与数字自检必须有空格
+
+类型的显示转换
+str -> num
+num = tonumber(str)
+
+num -> str
+str = tostring(num)
+
+获取字符串长度, 在字符串前加一个#（长度操作符）
+#"adfasdf"
+
+
+table (实现了关联数组,通过整数或字符串来索引)
+a = {}     -- 创建一个table, 即构造表达式 
+a[key]或者a.key访问,赋值  (语法糖)
+
+
+
+
+
+表达式 不等~=
+对table, userdata和函数，Lua做引用比较, 只有当他们引用同一个对象时，才认为他们相等
+
+
+控制结构
+数字型for  
+for var=exp1, exp2, exp3 do 
+    <执行体>
+end
+
+泛型for
+for i in pairs do 
+    <执行体>
+end
+
+迭代器
+io.lines()    文件迭代器
+pairs         table元素迭代器
+ipairs        数组元素迭代器
+string.gmatch 字符串迭代器
+* all has stashed
+
+
+ipairs()  -- iterate array, and return element's index and value
+io.lines() -- file iterate 
+pairs()   -- table iterate
+string.gmatch() -- string words iterate
+
+for var=exp1, exp2, exp3 do
+    <...>
+end
+
+for i,j in b do 
+    <...>
+end
+
+Function
+=========
+function return value
+---------------------
+start, end = string.find(str, pattern)
+
+# foo() return two values
+# if function is not the last element of the  expression
+x, y = foo(), 20                        --  x="a", y = 20
+
+function must be the last element of any expression, then tables, functions and so no can talk all the return values
+
+use (fun()) to only get one value, others ignored
+
+# unpack get an array, and return all the values from index 1 unpack({1,2,3,4})
+
+variable number of arguments
+------------------
+use ...
+eg.
+function add(...)
+    local s = 0
+    local a,b,c = ...
+    for i, v in iparits({...}) do 
+        s = s + v
+    end
+    return s
+end
+
+if the variable number list contains nil, then ,we need to use select to select the elements
+select("#", ...) -- return the length of the variable list, includes nil
+select(n, ...) -- return the value where index n point to 
+
+named argument
+---------------
+os.rename -- used to change file name
+rename{old="tmp.lua", new="init.lua"}
+
+Lexical Scoping
+
+closure
+--------
+mean non-local variable
+in internal functions, they can access the variables out side them who are inside the parient function
+
+what's closure?
+means a function with the aditional non-local variables. (some thinking like Javascript's Closure)
+[[[[[ Sand Box ]]]]]
+
+non-global function
+-------------------
+Lib = {}
+Lib.foo = function () ... end
+or 
+Lib = {
+    foo = function() .... end
+}
+or 
+Lib = {}
+function Lib.foo () .... end
+
+error with:
+local a = function() 
+    a()
+end
+
+must be:
+local a
+a = function() 
+    a()
+end
+
+and then ,use  local function foo() foo() end ,
+lua will express it to the second format, so it's ok to use.
+
+proper tail call
+----------------
+like goto invote. one function is the last action of an other function
+when the tail function called, then system does not need to return back to the original function stack, just goto the point where the original function is called
+
+
+Iterator and for 
+==================
+closure and iterator
+--------------------
+closure and factory
+
+for
+----
+for controller stored 3 value: iterator function, invariant state, control variable 
+
+
+compile
+================
+dofile
+loadfile  -- load lua code, compile it, but not run it, and only return errors, never deal with them.
+             use loadfile's result to make load file serval times come true
+loadstring -- read code from string
+              always do compile in gloabl socpe
+
+
+Errors and Exceptions
+=======================
+assert
+if not n then error end

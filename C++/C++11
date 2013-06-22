@@ -45,14 +45,14 @@ the return type can often be omitted, if the body consists only of one return st
 [capture](parameter){body}
 [](int x, int y)->int {retirn z;}
 
-* A lamnda function can refer to identifiers declared outside the lambda function.The set of these variables is commonly called a closure. Closures are defined between square brackets in the declaration of lambda expression. the mechanism allows these variables to be captured by value or by reference. 
+* A lambda function can refer to identifiers declared outside the lambda function.The set of these variables is commonly called a closure. Closures are defined between square brackets in the declaration of lambda expression. the mechanism allows these variables to be captured by value or by reference. 
 []     // no variables defined. attempting to use any external variables in the lambda is an error
 [x, &y]  // x iscaptured by value, y is captured by reference
 [&] //any externa; variable is implicitly captured by reference if used
 [=] //anu external variable is implicitily captured by value if used
 [&, x] //x is explicitly captured by value. other variables will be captured by reference
 [=, &z] //z is explicitlu capturd by reference. other variables will be captured by value
-* storing anonymous functions in variables, vactors, and arrays; and passing them as named parameters;
+* storing anonymous functions in variables, vectors, and arrays; and passing them as named parameters;
 #include <functional>
 #include <vector>
 #include <isostream>
@@ -62,34 +62,3 @@ int main() {
     std::function<double(double)> f0 = [](double x){return 1;}
     auto f1 = [] (double x){return x};
     decltype(f0) fa[3] = {f0, f1,[](double x){return x * x;}};
-
-
-
-Range-based for-loop
---------------------
-int my_array[5] = {1, 2, 3, 4, 5};
-for(int &x : my_array) {
-    x *= 2;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

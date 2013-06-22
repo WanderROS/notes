@@ -1,0 +1,83 @@
+C++11 Lambda的变量捕获和Lambda在Qt中的应用
+
+一、Lambda
+
+Lambda一般格式是：
+[capture](param) mutable ->return-type {body}
+
+这里主要复习一下Lambda中的capture
+lambda中有个闭包的概念，也就是C这类语言中的域的概念，要访问闭包外的变量，就必须通过 [] 来捕获
+[]的形式有以下
+[]               未定义任何变量，不能访问lambda之外定义的变量
+[x, &y]       x是通过值复制来访问的，y通过引用访问
+[&]             能通过引用访问外部所有变量
+[=]              外部变量都是通过值复制来访问
+[&, x]          x通过值复制访问，其他变量通过引用访问
+[=, &z]       z通过引用访问，其他变量通过值捕获
+   
+这里有两个例子
+int x=0;
+int y = 42;
+auto fun = [x, &y] {
+    std::cout<<"x: "<<x<<std::endl;
+    std::cout<<"y: "<<y<<std::endl;
+    y++;
+}
+
+x = y = 77;
+fun();
+fun();
+std::cout<<"final y: "<<y <<std::endl;
+
+输出结果为
+x: 0
+y: 77
+x: 0
+y: 78
+final y: 79
+
+这个例子很好理解，因为y是用引用传递的，在lambda中的改变也会反映到外部变量中，而x只是值传递，在lambda中只读
+
+另一个例子
+int id = 0;
+auto fun = [id]() mutable {
+    std::cout<<"id: "<<id<<std::endl;
+    id++;
+}
+id = 42;
+fun();
+fun();
+fun();
+std::cout<<"id"<<std::endl;
+
+输出结果为：
+id: 0
+id: 1
+id: 2
+42
+
+这个例子中，在lambda的声明中使用了mutable。
+在使用了mutable的lambda中，对象通过值传递，但可以在函数内部修改捕获变量的值。
+有趣的是这个改变不会反映到外部变量
+这非常类似不同函数总的静态变量
+
+这里还要考虑一下lambda的类型问题
+因为lambda是匿名函数对象，所以任何两个lambda的类型都不同。
+在c++11中可以使用auto或者使用template来定义某lambda的类型，或者使用decltype()来获取类型
+eg
+std::function<int(int, int)> returnLambda() {
+    return [](int x, int y) {
+        return x*y;
+    }
+}
+
+
+
+二、在Qt中的应用
+在Qt中主要用在槽函数中
+eg.
+connect(sender, &Sender::enabled, [=](bool enbaled) {
+    ...
+});
+
+
