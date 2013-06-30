@@ -1,3 +1,5 @@
+_G 是一个全局的table，保存了当前状态下的所有的变量
+
 lua -i file.lua   --执行脚本后进入交互模式
 dofile("file path") -- test a script
 
@@ -154,16 +156,36 @@ for
 for controller stored 3 value: iterator function, invariant state, control variable 
 
 
-compile
-================
+compilation, Exception and Errors
+=================================
+Compilation
+-------------
 dofile
 loadfile  -- load lua code, compile it, but not run it, and only return errors, never deal with them.
              use loadfile's result to make load file serval times come true
 loadstring -- read code from string
               always do compile in gloabl socpe
 
+C code
+-------
+load dynamic libs
 
-Errors and Exceptions
-=======================
-assert
+package.loadlib(path, lib)
+
+it return c function as lua function
+
+Errors
+-------
+because lua is a embaded language, we can't just end the process, better ending current chunck and returning to the application
+
+function error explicitly raise an error with a message
+error(任何类型的值)
+当错误消息为字符串时，会返回错误位置
+
+assert(arg1, "message")
+assert checks whether the first argument is not false and simply returns this argument; if false, assert just raise an error
 if not n then error end
+
+pcall 即 protected call
+以一种保护迷失调用其地一个参数，可捕获函数中的任何错误。如果无错误，pcall返回一个true，否则返回false和错误消息
+
