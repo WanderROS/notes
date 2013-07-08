@@ -1,0 +1,101 @@
+Moochine 
+A (very) simple and lightweight web framework based on ngx-openresty
+
+https://github.com/appwilldev/moochine-demo.git
+
+need: 
+OPENRESTY_HOME
+MOOCHINE_HOME
+
+=====================================
+-- 路由映射
+-- routeing.lua
+
+local router = require('mch.hello')
+router.setup()
+
+map('^/hello%?name=(.*)', 'test.hello')
+
+
+======================================
+-- 请求处理函数接受两个参数，request和response。(也可以用ngx.ctx.request, ngx.ctx.response来获取)
+-- test.lua
+
+module("test", package.seeall)
+
+local JSON = require("cjson")
+local Redis = require("resty.redis")
+
+function hello(request, response, name)
+
+
+
+end
+
+
+=====================================
+-- request 对象属性和方法
+-- properties
+method                    = ngx.var.request_mathod
+schema                    = ngx.var.schema
+host                      = ngx.var.host
+hostname                  = ngx.var.hostname
+uri                       = ngx.var.request_uri
+path                      = ngx.var.uri
+filename                  = ngx.var.request_filename
+query_string              = ngx.var.query_string
+user_agent                = ngx.var.http_user_agent
+remote_addr               = ngx.var.remote_addr
+remote_port               = ngx.var.remote_port
+remote_user               = ngx.var.remote_user
+remote_passwd             = ngx.var.remote_passwd
+content_type              = ngx.var.content_type
+content_length            = ngx.var.content_length
+
+headers                   = ngx.req.get_headers()
+uri_args                  = ngx.req.get_uri_args()
+post_args                 = ngx.req.get_post_args()
+socket                    = ngx.req.socket
+
+-- functions
+request:read_body()
+request:get_uri_arg(name, default)
+request:get_post_arg(name, default)
+request:get_arg(name, default)
+
+request:get_cookie(key, decrypt)
+request:rewrite(uri, jump)
+request:set_uri_args(args) 
+
+
+===========================================
+-- response 对象属性和方法
+-- property
+headers                = ngx.header
+
+-- functions
+response:set_cookie(key, value, encrypt, duration, path)
+response:write(content)
+response:writeln(content)
+response:ltp(template, data)
+response:redirect(url, status)
+
+response:finish()
+response:is_finished()
+response:defer(func, ...)
+
+
+===========================================
+Multi-App and Sub-App
+
+Multi-App 只需要将nginx.conf中moochine-app相关段配置多份即可
+
+Sub-App 在主app的application.lua内配置
+
+
+
+
+*****************************************************************************
+-- declare module 
+
+
