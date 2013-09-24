@@ -1,0 +1,13 @@
+http.ClientRequest http.request()
+
+header
+-----------
+setHeader(name, value)
+getHeader(name)
+remvoeHeader(name)
+
+
+response
+--------
+add a listener for response to the request object.
+

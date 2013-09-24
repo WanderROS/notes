@@ -1,0 +1,19 @@
+
+-- concatenate the elements of a table together to form a string
+-- *** each element must be able to be coerced into a string
+-- from index i to index j
+table.concat(table[,sep[,i[,j]]])
+
+-- sort the elements of a table in-place
+-- comp_fun must return true or false
+table.sort(table [,comp_fun])
+
+-- insert a value into the pos of the table or the end of the table if not pos is given
+table.insert(table, [pos,] value)
+
+-- remove an element of the table at pos. if no pos is given, remove from the end
+-- in fact, the remove fun decline the use size of the table
+-- if user size is 10, and the table contains 3 elements, remove will make the use size to 9, 
+-- and the 3 elements still exists
+table.remove(table[, pos])
+

@@ -1,0 +1,25 @@
+async 
+
+
+Control Flow
+series(task, [callback])
+
+parallel(tasks, [callback])
+
+parallelLimit(tasks, limit, [callback])
+
+// Repeatedly call fn while test returns true
+whilst(test, fn, callback)
+
+doWhilst(fn, test, callback)
+
+until(test, fn, callback)
+
+doUntil(fn, test, callback)
+
+forver(fn, callback)
+
+waterfall(tasks, [callback])
+
+compose(fn1, fn2 ...)
+
