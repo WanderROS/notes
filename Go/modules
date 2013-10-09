@@ -1,0 +1,32 @@
+os {
+    Create      -- 返回File对象，文件为O_RDWR
+    Open        -- 返回File对象，文件为O_RDONLY
+    OpenFile    -- 返回File对象，可以指定flag(O_RDONLY)和FileMode(0666)
+    File
+        Write   -- 写入byte数组
+        Close
+}
+
+io/ioutil {
+    ReadAll(io.Reader)     -- 返回byte[]
+    ReadFile(string)       -- 返回byte[]
+    TempFile(dir, prefix string)   -- os.File对象
+    WriteFile(filename string, data []byte, perm os.FileMode)  
+}
+
+
+net/http {
+    Get
+    Post
+    PostForm
+    Client
+        Do(req *request)
+        Get(url string)
+        Head(url string)
+        Post(url string, bodyType string, body io.Reader) (resp *Response, err error)
+        PostForm(url string, data url.Values) (resp *Respinse, err error)
+    NewRequest(method, url string, body io.Reader)(*Request, error)
+        Request
+        AddCookie(c *Cookie)
+        SetBasicAuth(username, password string)
+}
