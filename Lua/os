@@ -1,0 +1,33 @@
+OS library
+
+-- return cpu time since lua started in seconds
+os.clock()
+
+
+-- format
+-- *t  a table is returned containing the time info
+-- !*t the time is converted to coordinated universal time
+-- format string has the same format as the c strftime() function
+os.date([format [,time]])
+
+os.difftime(t2, t1)
+
+-- execute shell command
+os.execute([command])
+
+os.exit([code])
+
+os.getenv(varname)
+
+os.remove(filename)
+
+os.rename(oldname, newname)
+
+-- category: all, collate,  ctype, menetary, numeric, time;
+-- default is all
+os.setlocale(locale [, category])
+
+os.time([table])
+
+-- just return a tmp file name
+os.tmpname()

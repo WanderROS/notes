@@ -1,0 +1,67 @@
+io library
+
+unless otherwise stated, all i/o functions return nil on failure(pluse an error message as a second result) and some value different from nil on success
+
+
+file = io.open(filename [,mode])
+--[[
+r
+w
+a
+r+ all previous data is preserved
+w+ all previous data is erased
+a
+b
+--]]
+
+io.close([file])
+file:close()
+
+io.flush()
+file:flush()
+
+-- when called with a file name, it opens the named file in text  mode,  and use it as the default input descriptor
+-- when called with a file descriptor, it simply sets that file descriptor as the default input file
+-- when called with no param, returns the current default input file descriptor
+-- in case of errors, it raises the error, not return error code
+io.input([file])
+
+-- returns an iterator function, return nil at the end of the file
+io.lines([filename])
+
+io.lines()
+io.input():lines()
+
+io.output([file])
+
+io.read(format1, ...)
+io.input():read()
+
+-- return a descriptor for a temporary file. open in update mode and is automatically removed when the program ends
+io.tmpfile()
+
+-- check whether obj is a valid file descriptor
+-- is and opend:  return 'file'
+-- is and closed:  return 'closed file'
+-- no: return nil 
+io.type(obj)
+
+io.write(value1, ...)
+io.output():write()
+
+f:close()
+
+f:flush()
+
+f:lines()
+
+f:read(format1, ...)
+
+fseek([whence] [,offset])
+--[[
+set
+cur
+end
+--]]
+
+f:write(value1,...)

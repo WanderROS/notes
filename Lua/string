@@ -1,0 +1,49 @@
+string.byte(s[,i[,j]])
+s:byte([i[,j]])
+
+string.char(i1, i2, i3...)
+
+-- returns a binary representation of the given function.so loadstring on that string returns a copy of the function
+string.dump(function)
+
+-- like c printf("%s, %c", a,b)
+-- c,d,e,E,f,g,G,i,o,u,x,X all expect a number as argument
+-- q and s expect a string
+-- %q will wrap the string with quotes
+string.format(s, e1, e2, ...)
+s:format(e1, e2, ...)
+
+-- find the first
+string.find(s, pattern, [,init[,plain]])
+s:find(pattern[, init,[,plain]])
+
+-- return a pattern finding iterator, will look through the string
+string.gmatch(s, pat)
+s:gmatch(pat)
+
+-- extract substring by matching patterns
+string.match(s, pattern [,init])
+s:match(pattern [, init])
+
+-- replace all instances of the pattern with the replacement. use n to limit the count of the instances replaced
+-- take care of the difference of (.-) and (.*)
+string.gsub(s, pattern, replace [,n])
+s:gsub(pattern, replace [,n])
+
+string.sub(s, i[, j])
+s:sub(i[,j])
+
+string.upper(s)
+s:upper()
+
+string.lower(s)
+s:lower()
+
+string.reverse(s)
+s:reverse()
+
+string.rep(s, n)
+s:rep(n)
+
+string.len(s)
+s.len()

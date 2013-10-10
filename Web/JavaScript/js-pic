@@ -1,0 +1,12 @@
+Image 对象
+var image = new Image([w], [h])
+image.src = 'src'
+image.width, image.height
+
+浏览器中的所有图像都在document.images 数组中
+也可通过<img >中的name访问 document.images[name] || document.name
+
+图像属性： border, complete, height, width, lowsrc, src, name, hspace, vspace
+图像事件： onabort, onerror, onkeydown, onkeypress, onkeyup, onload
+
+
