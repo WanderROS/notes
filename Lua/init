@@ -189,3 +189,38 @@ if not n then error end
 pcall 即 protected call
 以一种保护迷失调用其地一个参数，可捕获函数中的任何错误。如果无错误，pcall返回一个true，否则返回false和错误消息
 
+xpcall 接受一个调用函数和一个错误处理函数
+当发生错误时，lua会在调用栈展开前调用错误处理函数。从而就可以在函数中使用debug库来获取关于错误的额外信息。
+debug.debug : 提供一个Lua提示符，让用户来检查错误的原因。
+debug.traceback : 根据调用栈来构建一个扩展的错误消息。可以在任何时候使用debug.traceback来获取当前之心的调用栈
+
+
+协同(coroutine)程序
+-- 创建协同程序，返回一个thread类新的值
+-- 写同程序有四个状态
+-- suspended, running, dead, normal
+-- 使用函数status检查coroutine程序状态
+create(thread)
+thread = coroutine.create(function() .. end ) 
+
+status(thread)
+
+-- 用于启动或再次启动一个协同程序的执行，并将其状态改为运行
+resume(thread) 
+
+-- yield  让运行中的coroutine程序挂起，之后再恢复期执行
+th = coroutine.create(function() 
+    for i = 1, 10 
+    do 
+        print("co", i) 
+        coroutine.yield()
+    end
+end
+
+-- resume-yield 交换数据
+-- 第一次使用resume时，并没有yield等待，因此传给resume的额外参数都将视为协同程序主函数的参数
+-- resume 调用返回的内容中，第一个值为true表示无错，后面的所有值都是对应yield传入的参数
+-- yield返回的返回值就是resume传入的额外参数
+-- 协同程序住函数的返回值作为对应resume的返回值
+
+

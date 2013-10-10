@@ -50,7 +50,3 @@ CLOSED (3)
 方法     send/close
 	send(data)
 	close(optional code, optional reason)
-
-	
-
-
