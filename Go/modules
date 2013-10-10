@@ -30,3 +30,26 @@ net/http {
         AddCookie(c *Cookie)
         SetBasicAuth(username, password string)
 }
+
+
+time {
+    Now()
+    Time
+        ...
+}
+
+errors {
+    New
+}
+
+log {
+    Print[f|ln]
+}
+
+fmt {
+    Sprintf()
+}
+
+gzip {
+    NewReader
+}
