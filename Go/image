@@ -1,0 +1,4 @@
+image and image/color
+color.Color and color.Model describe colors
+image.Point and image.Rectangle describe basic 2-D geometry
+image.Image brings color and image together
