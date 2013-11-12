@@ -1,0 +1,40 @@
+test: check file types and compare values
+
+test EXPRESSION
+[ EXPRESSION ]
+
+
+( EXPRESSION )
+! EXPRESSION
+-a: 与
+-o: 或
+-n string: 字符串长度非0
+-z string: 字符串长度为0
+string1 = string2 
+string1 != string2
+integer1 -eq integer2
+integer1 -gt integer2
+-le
+-lt
+FILE1 -ef FILE2: 文件1和文件2有相同的设备和节点号
+FILE1 -nt FILE2: 文件1比文件2新
+FILE1 -ot FILE2: 文件1比FILE2旧
+-b FILE: 文件存在且为块设备
+-c FILE: 文件存在且为字符设备
+-d FILE: 文件存在且为目录
+-e FILE: 文件存在
+-f FILE: 文件存在且为普通文件
+-g FILE: 文件存在且设置了组ID
+-h FILE: 文件存在，且为链接文件，同-L
+-k FILE: 文件存在，且设置了sticky位
+-L FILE: 同-h
+-O FILE: 文件存在，且所有者ID有效
+-p FILE: 文件存在，且为一个命名管道
+-r FILE: 文件存在，且赋予了读权限
+-s FILE: 文件存在，且size大于0
+-S FILE: 文件存在，且为socket
+-t FD: 文件描述符在某终端中打开
+-u FILE: 文件存在，且其set-user-id位已设置
+-w FILE: 文件存在，且授予了写权限
+-x FILE: 文件存在，且授予了执行权限
+
